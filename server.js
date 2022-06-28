@@ -4,6 +4,8 @@ const express = require("express");
 const app = express();
 //loading express
 
+const cors = require("cors");
+
 const PORT = process.env.PORT || 3000; // checking if port is there in env already , else give 3000->arbritrary port no
 
 const path = require("path");
@@ -12,6 +14,12 @@ app.use(express.static("public")); // tells express in which folder is my css fi
 
 const connectDB = require("./config/db");
 connectDB();
+
+const corsOptions = {
+  origin: process.env.ALLOWED_CLIENTS.split(","),
+  //'http:localhost:3000'  'http:localhost:5000'  'http:localhost:3030'
+};
+app.use(cors(corsOptions));
 
 app.use(express.json());
 
@@ -25,8 +33,4 @@ app.use("/files", require("./routes/show"));
 
 app.use("/files/download", require("./routes/download")); //for creating the link for the download button
 
-app.listen(
-  PORT,
-  //running app in a port //giving port no.
-  console.log(`Listening on port ${PORT}`)
-);
+app.listen(PORT, console.log(`Listening on port ${PORT}.`));
