@@ -2,7 +2,7 @@ const router = require("express").Router();
 const File = require("../models/file");
 
 router.get("/:uuid", async (req, res) => {
-  //uuid prefix add kiya
+  //uuid prefix add kiya 
   // Extract link and get file from storage send download stream
   const file = await File.findOne({ uuid: req.params.uuid }); // if uuid is equal to hamari uuid(jo params mein likhi hai) toh file humein dedo
   // Link expired

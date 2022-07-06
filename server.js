@@ -16,8 +16,10 @@ const connectDB = require("./config/db");
 connectDB();
 
 const corsOptions = {
-  origin: process.env.ALLOWED_CLIENTS.split(","),
-  //'http:localhost:3000'  'http:localhost:5000'  'http:localhost:3030'
+  //origin: process.env.ALLOWED_CLIENTS.split(","),
+  origin: "*",
+  credentials: true, //access-control-allow-credentials:true
+  optionSuccessStatus: 200,
 };
 app.use(cors(corsOptions));
 
